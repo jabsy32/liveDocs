@@ -16,6 +16,7 @@ export const createDocument = async ({
       creatorId: userId,
       email,
       title: "Untitled",
+      createdAt: new Date().toISOString(),
     };
 
     const usersAccesses: RoomAccesses = {
@@ -71,5 +72,15 @@ export const updateDocument = async (roomId: string, title: string) => {
     return parseStringify(updateRoom);
   } catch (error) {
     console.log("Error updating document", error);
+  }
+};
+
+export const getAllDocuments = async (email: string) => {
+  try {
+    const rooms = await liveblocks.getRooms({ userId: email });
+
+    return parseStringify(rooms);
+  } catch (error) {
+    console.log("Error getting rooms", error);
   }
 };
