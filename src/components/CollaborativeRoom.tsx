@@ -14,6 +14,8 @@ import Loader from "@/components/Loader";
 const CollaborativeRoom = ({
   roomId,
   roomMetadata,
+  users,
+  currentUserType,
 }: CollaborativeRoomProps) => {
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -21,8 +23,6 @@ const CollaborativeRoom = ({
 
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLDivElement>(null);
-
-  const currentUserType = "editor";
 
   const updateTitleHandler = async (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -119,7 +119,7 @@ const CollaborativeRoom = ({
             </div>
           </Header>
 
-          <Editor />
+          <Editor roomId={roomId} currentUserType={currentUserType} />
         </div>
       </ClientSideSuspense>
     </RoomProvider>
