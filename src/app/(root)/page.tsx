@@ -8,6 +8,7 @@ import AddDocumentBtn from "@/components/AddDocumentBtn";
 import { getAllDocuments } from "@/lib/actions/room.actions";
 import Link from "next/link";
 import { dateConverter } from "@/lib/utils";
+import { DeleteModal } from "@/components/DeleteModal";
 
 const Home = async () => {
   // get user or redirect to sign in page
@@ -61,6 +62,7 @@ const Home = async () => {
                     </p>
                   </div>
                 </Link>
+                <DeleteModal roomId={id} />
               </li>
             ))}
           </ul>
