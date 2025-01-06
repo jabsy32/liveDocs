@@ -12,18 +12,27 @@ export const getClerkUsers = async ({ userIds }: { userIds: string[] }) => {
       emailAddress: userIds,
     });
 
-    const users = data.map((user) => ({
+    const registeredUsers = data.map((user) => ({
       id: user.id,
       name: `${user.firstName} ${user.lastName === null ? "" : user.lastName}`,
       email: user.emailAddresses[0].emailAddress,
       avatar: user.imageUrl,
     }));
 
-    const sortedUsers = userIds.map((email) =>
-      users.find((user) => user.email === email),
-    );
+    console.log("users", registeredUsers);
 
-    return parseStringify(sortedUsers);
+    const unregisteredUsers = userIds
+      .filter((email) => !registeredUsers.some((user) => user.email === email))
+      .map((email) => ({
+        id: email,
+        name: "Pending invite",
+        email,
+        avatar: "/assets/icons/pendingBlack.webp",
+      }));
+
+    console.log("sorted", unregisteredUsers);
+
+    return parseStringify([...registeredUsers, ...unregisteredUsers]);
   } catch (error) {
     console.error("Error fetching users: ", error);
   }

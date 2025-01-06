@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import UserTypeSelector from "@/components/UserTypeSelector";
 import Collaborator from "@/components/Collaborator";
+import { updateDocumentAccess } from "@/lib/actions/room.actions";
 
 const ShareModal = ({
   roomId,
@@ -29,7 +30,18 @@ const ShareModal = ({
   const [email, setEmail] = useState("");
   const [userType, setUserType] = useState<UserType>("viewer");
 
-  const shareDocumentHandler = async () => {};
+  const shareDocumentHandler = async () => {
+    setLoading(true);
+
+    await updateDocumentAccess({
+      roomId,
+      email,
+      userType: userType as UserType,
+      updatedBy: user.info,
+    });
+
+    setLoading(false);
+  };
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -63,7 +75,7 @@ const ShareModal = ({
           <div className="flex flex-1 rounded-mb bg-dark-400">
             <Input
               id="email"
-              placeholder="Enter your email"
+              placeholder="Enter the email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="share-input"
