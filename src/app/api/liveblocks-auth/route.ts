@@ -6,7 +6,7 @@ import { getUserColor } from "@/lib/utils";
 export async function POST(request: Request) {
   const clerkUser = await currentUser();
 
-  if (!clerkUser) redirect("/sing-in");
+  if (!clerkUser) redirect("/sign-in");
 
   const { id, firstName, lastName, emailAddresses, imageUrl } = clerkUser;
 

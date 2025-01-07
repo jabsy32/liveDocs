@@ -15,7 +15,7 @@ const Home = async () => {
   // get user or redirect to sign in page
   const clerkUser = await currentUser();
 
-  if (!clerkUser) redirect("/sing-in");
+  if (!clerkUser) redirect("/sign-in");
 
   const roomDocuments = await getAllDocuments(
     clerkUser.emailAddresses[0].emailAddress,

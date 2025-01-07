@@ -4,7 +4,6 @@ import { nanoid } from "nanoid";
 import { liveblocks } from "@/lib/liveblocks";
 import { revalidatePath } from "next/cache";
 import { getAccessType, parseStringify } from "@/lib/utils";
-import { redirect } from "next/navigation";
 
 export const createDocument = async ({
   userId,
